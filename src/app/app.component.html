@@ -1,8 +1,5 @@
-
-<ul>
-  <li *ngFor="let course of courses$ |async">
-    {{course}}
-  </li>
+<ul *ngIf="author$ | async as author">
+  <li>{{author.name}}</li>
+  <li>{{author.students}}</li>
+  <li>{{author.isPremium}}</li>
 </ul>
-<p>{{course$|async}}</p>
-<p>{{author$|async|json}}</p>
