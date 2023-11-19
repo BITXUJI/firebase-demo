@@ -11,9 +11,10 @@ export class AppComponent {
   courses$: AngularFireList<any>;
   courses;
 
-  constructor(db: AngularFireDatabase) {
+
+  constructor(private db: AngularFireDatabase) {
     this.courses$ = db.list('/courses');
-    this.courses = db.list('/courses').valueChanges();
+    this.courses = db.list('/courses').snapshotChanges();
   }
   add(course: HTMLInputElement) {
     this.courses$.push({
@@ -28,5 +29,15 @@ export class AppComponent {
     }
     );
     course.value = '';
+  }
+  update(course) {
+    this.db.object("/courses/" + course.key)
+      .update({
+        price: 200
+      });
+  }
+  delete(course) {
+    this.db.object("/courses/" + course.key).remove()
+      .then(x => console.log("DELETED."));
   }
 }

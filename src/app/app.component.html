@@ -1,4 +1,6 @@
 <input type="text" (keyup.enter)="add(course)"#course>
 <ul *ngFor="let course of courses|async">
-  <li>{{course.name ||course}}</li>
+  <li>{{course.payload.val().name||course.payload.val()}}</li>
+  <button (click)="update(course)">Update</button>
+  <button (click)="delete(course)">Delete</button>
 </ul>
